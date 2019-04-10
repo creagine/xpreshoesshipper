@@ -77,7 +77,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void signIn() {
         Log.d(TAG,"Sign In");
-        validateForm();
+
+        if (TextUtils.isEmpty(inputEmail.getText().toString())){
+            Toast.makeText(this, "Please input your Email", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (TextUtils.isEmpty(inputPassword.getText().toString())){
+            Toast.makeText(this, "Please input your Password", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         progressBarLogin.setVisibility(View.VISIBLE);
         String email = inputEmail.getText().toString();
@@ -102,23 +109,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void onAuthSuccess(FirebaseUser user) {
 
-        String userId = firebaseUser.getUid();
-        Common.userId = userId;
-
         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
         startActivity(intent);
         finish();
 
     }
 
-    private void validateForm(){
-
-        boolean result = true;
-        if (TextUtils.isEmpty(inputEmail.getText().toString())){
-            Toast.makeText(this, "Please input your Email", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(inputPassword.getText().toString())){
-            Toast.makeText(this, "Please input your Password", Toast.LENGTH_SHORT).show();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null){
+            sendToMain();
         }
 
+    }
+
+    private void sendToMain() {
+        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
