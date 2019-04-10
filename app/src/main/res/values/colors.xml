@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorTab">#FFB301</color>
+    <color name="tabTextWhite">#FFFFFF</color>
+    <color name="tabTextBlack">#000000</color>
+    <color name="loginBackground">#FFA939</color>
+    <color name="loginButton">#009CC6</color>
+
+</resources>
